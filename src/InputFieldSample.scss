@@ -1,0 +1,40 @@
+$size: 20rem;
+
+.InputFieldSample__root {
+    margin-top: 50px;
+}
+
+.InputFieldSample__outlined {
+    width: $size;
+    &, &:focus, &:hover, &:active, &:focus-within {
+        padding: 0;
+    }
+}
+
+.InputFieldSample__square {
+    margin-top: 20px;
+    width: $size;
+    height: $size;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    & div {
+        margin: auto;
+    }
+}
+
+.InputFieldSample__button-root {
+    margin: 20px auto;
+
+    & button {
+        background-color: lightgrey;
+
+        & * {
+            text-transform: capitalize;
+        }
+    }
+}
+

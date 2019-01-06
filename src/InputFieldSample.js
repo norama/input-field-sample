@@ -7,36 +7,31 @@ import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Button from '@material-ui/core/Button';
+
+
+import './InputFieldSample.scss';
 
 const styles = (theme) => ({
     root: {
         flexGrow: 1,
         marginTop: '50px'
-    },
-    paper: {
-        height: 140,
-        width: 100,
-    },
-    control: {
-        padding: theme.spacing.unit * 2,
-    },
+    }
 });
 
 
 class InputFieldSample extends React.Component {
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <Grid container className={classes.root} justify="center">
-                <TextField />
+            <Grid container className="InputFieldSample__root" justify="center">
+                <Sample />
             </Grid>
         );
     }
 }
 
-class TextField extends React.Component {
+class Sample extends React.Component {
 
     constructor(props) {
         super(props);
@@ -44,31 +39,53 @@ class TextField extends React.Component {
         this.labelRef = React.createRef();
 
         this.state = {
-            name: ''
+            input: ''
         };
     }
 
     handleChange = (event) => {
-        this.setState({ name: event.target.value });
+        this.setInput(event.target.value);
+    }
+
+    handleClear = () => {
+        this.setInput('');
+    }
+
+    setInput(input) {
+        this.setState({ input });
     }
 
     render() {
         return (
-            <FormControl variant="outlined">
-                <InputLabel
-                    shrink
-                    htmlFor="input-outlined"
+            <div>
+                <FormControl variant="outlined">
+                    <InputLabel
+                        shrink
+                        htmlFor="input-outlined"
+                    >
+                        Input field:
+                    </InputLabel>
+                    <OutlinedInput
+                        id="input-outlined"
+                        value={this.state.input}
+                        notched={true}
+                        onChange={this.handleChange}
+                        labelWidth={80}
+                        className="InputFieldSample__outlined"
+                    />
+                </FormControl>
+                <div
+                    id="textarea-outlined"
+                    className="InputFieldSample__square"
                 >
-                    Input field:
-                </InputLabel>
-                <OutlinedInput
-                    id="input-outlined"
-                    value={this.state.name}
-                    notched={true}
-                    onChange={this.handleChange}
-                    labelWidth={80}
-                />
-            </FormControl>
+                    <div>{this.state.input}</div>
+                </div>
+                <Grid container className="InputFieldSample__button-root" justify="center">
+                    <Button variant="outlined" onClick={this.handleClear}>
+                        Clear
+                    </Button>
+                </Grid>
+            </div>
         );
     }
 }
