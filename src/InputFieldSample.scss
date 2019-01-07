@@ -12,7 +12,6 @@ $size: 20rem;
 }
 
 .InputFieldSample__square {
-    margin-top: 20px;
     width: $size;
     height: $size;
     border: 1px solid black;
@@ -24,6 +23,10 @@ $size: 20rem;
     & div {
         margin: auto;
     }
+}
+
+.InputFieldSample__input-root {
+    height: 100px;
 }
 
 .InputFieldSample__button-root {

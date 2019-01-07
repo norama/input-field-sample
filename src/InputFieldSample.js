@@ -4,9 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 
@@ -39,12 +37,20 @@ class Sample extends React.Component {
         this.labelRef = React.createRef();
 
         this.state = {
-            input: ''
+            input: '',
+            error: null,
+            focused: false
         };
     }
 
     handleChange = (event) => {
-        this.setInput(event.target.value);
+        const input = event.target.value;
+        if (input.length <= 10) {
+            this.setInput(input);
+        } else {
+            this.setError('Max. 10 characters!');
+        }
+        
     }
 
     handleClear = () => {
@@ -52,28 +58,39 @@ class Sample extends React.Component {
     }
 
     setInput(input) {
-        this.setState({ input });
+        this.setState({ input, error: null });
+    }
+
+    setError(error) {
+        this.setState({ error });
+    }
+
+    handleFocus = () => {
+        this.setState({ focused: true });
+    }
+
+    handleBlur = () => {
+        this.setState({ focused: false });
     }
 
     render() {
+        const label = this.state.input || this.state.focused ? "Input field:" : "Enter input text";
+
         return (
             <div>
-                <FormControl variant="outlined">
-                    <InputLabel
-                        shrink
-                        htmlFor="input-outlined"
-                    >
-                        Input field:
-                    </InputLabel>
-                    <OutlinedInput
+                <div onFocus={this.handleFocus} onBlur={this.handleBlur} className="InputFieldSample__input-root">
+                    <TextField
+                        error={!!this.state.error}
                         id="input-outlined"
-                        value={this.state.input}
-                        notched={true}
-                        onChange={this.handleChange}
-                        labelWidth={80}
+                        label={label}
                         className="InputFieldSample__outlined"
+                        value={this.state.input}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="outlined"
+                        helperText={this.state.error ? "Max. 10 characters!" : ""}
                     />
-                </FormControl>
+                </div>
                 <div
                     id="textarea-outlined"
                     className="InputFieldSample__square"
