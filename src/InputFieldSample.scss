@@ -1,9 +1,5 @@
 $size: 20rem;
 
-.InputFieldSample__root {
-    margin-top: 50px;
-}
-
 .InputFieldSample__outlined {
     width: $size;
     &, &:focus, &:hover, &:active, &:focus-within {
@@ -29,15 +25,13 @@ $size: 20rem;
     height: 100px;
 }
 
-.InputFieldSample__button-root {
-    margin: 20px auto;
+.InputFieldSample__button {
+    margin-top: 20px;
 
-    & button {
-        background-color: lightgrey;
+    background-color: lightgrey;
 
-        & * {
-            text-transform: capitalize;
-        }
+    & * {
+        text-transform: capitalize;
     }
 }
 

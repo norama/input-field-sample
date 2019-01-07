@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
-
 import Grid from '@material-ui/core/Grid';
 
 import TextField from '@material-ui/core/TextField';
@@ -10,21 +8,14 @@ import Button from '@material-ui/core/Button';
 
 import './InputFieldSample.scss';
 
-const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-        marginTop: '50px'
-    }
-});
-
 
 class InputFieldSample extends React.Component {
 
     render() {
         return (
-            <Grid container className="InputFieldSample__root" justify="center">
+            <Center>
                 <Sample />
-            </Grid>
+            </Center>
         );
     }
 }
@@ -97,15 +88,23 @@ class Sample extends React.Component {
                 >
                     <div>{this.state.input}</div>
                 </div>
-                <Grid container className="InputFieldSample__button-root" justify="center">
-                    <Button variant="outlined" onClick={this.handleClear}>
-                        Clear
-                    </Button>
-                </Grid>
+                <Center>
+                    <div className="InputFieldSample__button">
+                        <Button variant="outlined" onClick={this.handleClear}>
+                            Clear
+                        </Button>
+                    </div>
+                </Center>
             </div>
         );
     }
 }
 
+const Center = ({ children }) => (
+    <Grid container justify="center">
+        {children}
+    </Grid>
+);
 
-export default withStyles(styles)(InputFieldSample);
+
+export default InputFieldSample;
