@@ -23,7 +23,7 @@ There is a Clear button which clears both the input field and the squared area.
 
 ## Demo
 
-Click [here](https://input-field-sample-redux-pjtuuvgawt.now.sh/) to see it running.
+Click [here](https://input-field-sample-hooks-efqttjleff.now.sh) to see it running.
 
 ## Available Scripts
 
