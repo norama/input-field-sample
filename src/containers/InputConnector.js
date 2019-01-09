@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { getInput } from '../store/reducer';
+import { getInput, getError } from '../store/reducer';
 import { changeInputAction } from '../store/actions';
 
 import InputView from '../components/InputView';
@@ -11,7 +11,7 @@ class InputConnector extends React.Component {
 
     render() {
         return (
-            <InputView input={this.props.input} onChange={this.handleChange} />
+            <InputView input={this.props.input} error={this.props.error} onChange={this.handleChange} />
         );
     }
 
@@ -23,8 +23,9 @@ class InputConnector extends React.Component {
 
 function mapStateToProps(state) {
     const input = getInput(state);
+    const error = getError(state);
 
-    return { input };
+    return { input, error };
 }
 
 export default connect(mapStateToProps)(InputConnector);

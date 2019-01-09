@@ -8,7 +8,14 @@ export default function reducer(state=initialState, action={}) {
     switch (action.type) {
         case ActionTypes.INPUT_CHANGED:
             return {
-                input: action.input
+                input: action.input,
+                error: null
+            };
+
+        case ActionTypes.INPUT_ERROR:
+            return {
+                input: state.input,
+                error: action.error
             };
 
         default:
@@ -20,4 +27,8 @@ export default function reducer(state=initialState, action={}) {
 
 export function getInput(state) {
     return state.input;
+}
+
+export function getError(state) {
+    return state.error;
 }

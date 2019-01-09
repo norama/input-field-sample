@@ -6,3 +6,10 @@ export function changeInputAction(input) {
         input
     };
 }
+
+export function changeInputError(error) {
+    return {
+        type: ActionTypes.INPUT_ERROR,
+        error
+    }
+}

@@ -10,8 +10,9 @@ import InputConnector from './containers/InputConnector';
 import * as serviceWorker from './serviceWorker';
 
 import reducer from './store/reducer';
+import { inputValidator } from './store/validators';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(inputValidator, thunk));
 
 ReactDOM.render(
     (

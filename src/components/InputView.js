@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
 import './InputView.scss';
 
 class InputView extends React.Component {
@@ -16,32 +15,18 @@ class InputView extends React.Component {
         this.labelRef = React.createRef();
 
         this.state = {
-            error: null,
             focused: false
         };
     }
 
     handleChange = (event) => {
         const input = event.target.value;
-        if (input.length <= 10) {
-            this.setInput(input);
-        } else {
-            this.setError('Max. 10 characters!');
-        }
+
+        this.props.onChange(input);
     }
 
     handleClear = () => {
-        this.setInput('');
-    }
-
-    setInput(input) {
-        this.setState({ error: null }, () => {
-            this.props.onChange(input);
-        });
-    }
-
-    setError(error) {
-        this.setState({ error });
+        this.props.onChange('');
     }
 
     handleFocus = () => {
@@ -60,7 +45,7 @@ class InputView extends React.Component {
                 <div>
                     <div onFocus={this.handleFocus} onBlur={this.handleBlur} className="InputFieldSample__input-root">
                         <TextField
-                            error={!!this.state.error}
+                            error={!!this.props.error}
                             id="input-outlined"
                             label={label}
                             className="InputFieldSample__outlined"
@@ -68,7 +53,7 @@ class InputView extends React.Component {
                             onChange={this.handleChange}
                             margin="normal"
                             variant="outlined"
-                            helperText={this.state.error ? "Max. 10 characters!" : ""}
+                            helperText={this.props.error ? this.props.error : ""}
                         />
                     </div>
                     <div
