@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -76,6 +77,11 @@ class InputView extends React.Component {
 
 }
 
+InputView.propTypes = {
+    input: PropTypes.string.isRequired,
+    error: PropTypes.string,
+    onChange: PropTypes.func.isRequired
+};
 
 const Center = ({ children }) => (
     <Grid container justify="center">

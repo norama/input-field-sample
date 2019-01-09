@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
@@ -20,6 +21,11 @@ class InputConnector extends React.Component {
     }
 
 }
+
+InputConnector.propTypes = {
+    input: PropTypes.string.isRequired,
+    error: PropTypes.string
+};
 
 function mapStateToProps(state) {
     const input = getInput(state);
