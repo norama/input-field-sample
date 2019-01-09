@@ -1,103 +1,76 @@
 import React from 'react';
+import { useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
 import './InputFieldSample.scss';
 
+const InputFieldSample = ({ validate }) => {
 
-class InputFieldSample extends React.Component {
+    const [input, setInput] = useState('');
+    const [error, setError] = useState(null);
 
-    render() {
-        return (
-            <Center>
-                <Sample />
-            </Center>
-        );
-    }
-}
+    const [focused, setFocused] = useState(false);
 
-class Sample extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.labelRef = React.createRef();
-
-        this.state = {
-            input: '',
-            error: null,
-            focused: false
-        };
-    }
-
-    handleChange = (event) => {
-        const input = event.target.value;
-        if (input.length <= 10) {
-            this.setInput(input);
-        } else {
-            this.setError('Max. 10 characters!');
+    const handleChange = (event) => {
+        const newInput = event.target.value;
+        const newError = validate(newInput);
+        setError(newError);
+        if (!newError) {
+            setInput(newInput);
         }
-        
-    }
+    };
 
-    handleClear = () => {
-        this.setInput('');
-    }
+    const handleClear = () => {
+        setError(null);
+        setInput('');
+    };
 
-    setInput(input) {
-        this.setState({ input, error: null });
-    }
+    const handleFocus = () => {
+        setFocused(true);
+    };
 
-    setError(error) {
-        this.setState({ error });
-    }
+    const handleBlur = () => {
+        setFocused(false);
+    };
 
-    handleFocus = () => {
-        this.setState({ focused: true });
-    }
+    const label = input || focused ? "Input field:" : "Enter input text";
 
-    handleBlur = () => {
-        this.setState({ focused: false });
-    }
-
-    render() {
-        const label = this.state.input || this.state.focused ? "Input field:" : "Enter input text";
-
-        return (
+    return (
+        <Center>
             <div>
-                <div onFocus={this.handleFocus} onBlur={this.handleBlur} className="InputFieldSample__input-root">
+                <div onFocus={handleFocus} onBlur={handleBlur} className="InputFieldSample__input-root">
                     <TextField
-                        error={!!this.state.error}
+                        error={error}
                         id="input-outlined"
                         label={label}
                         className="InputFieldSample__outlined"
-                        value={this.state.input}
-                        onChange={this.handleChange}
+                        value={input}
+                        onChange={handleChange}
                         margin="normal"
                         variant="outlined"
-                        helperText={this.state.error ? "Max. 10 characters!" : ""}
+                        helperText={error ? error : ""}
                     />
                 </div>
                 <div
                     id="textarea-outlined"
                     className="InputFieldSample__square"
                 >
-                    <div>{this.state.input}</div>
+                    <div>{input}</div>
                 </div>
                 <Center>
                     <div className="InputFieldSample__button">
-                        <Button variant="outlined" onClick={this.handleClear}>
+                        <Button variant="outlined" onClick={handleClear}>
                             Clear
                         </Button>
                     </div>
                 </Center>
             </div>
-        );
-    }
+        </Center>
+    );
 }
 
 const Center = ({ children }) => (
@@ -105,6 +78,5 @@ const Center = ({ children }) => (
         {children}
     </Grid>
 );
-
 
 export default InputFieldSample;
